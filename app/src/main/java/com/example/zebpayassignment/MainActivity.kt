@@ -15,7 +15,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
-import com.example.zebpayassignment.ui.component.CrazyListChain
+import com.example.zebpayassignment.ui.component.CrazyListBuilder
 import com.example.zebpayassignment.ui.theme.ZebPayAssignmentTheme
 
 class MainActivity : ComponentActivity() {
@@ -35,24 +35,24 @@ class MainActivity : ComponentActivity() {
 
 // Composable to render the crazy list
 @Composable
-fun MyCrazyListDemo(innerPadding : PaddingValues) {
+fun MyCrazyListDemo(innerPadding: PaddingValues) {
     val painter = painterResource(id = R.drawable.ic_launcher_background)
     val context = LocalContext.current
 
-    Column (modifier = Modifier.padding(innerPadding)) {
-
-        CrazyListChain
+    Column(modifier = Modifier.padding(innerPadding)) {
+        CrazyListBuilder()
             .space(16.dp)
-            .header("Demo")
-            .text("CrazyList custom view using compose")
+            .header("CrazyList Demo")
+            .text("CrazyList TextView.")
             .image(painter)
-            .button("Click Me") {
-                Toast.makeText(context, "Button clicked!", Toast.LENGTH_SHORT).show()
+            .button("Click Here") {
+                Toast.makeText(context, "Button clicked", Toast.LENGTH_SHORT).show()
             }
-            .textField("Type something") {
-                Toast.makeText(context, "Typed: $it", Toast.LENGTH_SHORT).show()
+            .image(painter)
+            .textField(id = "username", hint = "Enter Username"){
+                Toast.makeText(context, "User Typed: $it", Toast.LENGTH_SHORT).show()
             }
-            .Render(8.dp)
+            .image(painter)
+            .Render(16.dp)
     }
-
 }
