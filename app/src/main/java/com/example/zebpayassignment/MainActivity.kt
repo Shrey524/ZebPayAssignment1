@@ -1,0 +1,58 @@
+package com.example.zebpayassignment
+
+import android.os.Bundle
+import android.widget.Toast
+import androidx.activity.ComponentActivity
+import androidx.activity.compose.setContent
+import androidx.activity.enableEdgeToEdge
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.Scaffold
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.unit.dp
+import com.example.zebpayassignment.ui.component.CrazyListChain
+import com.example.zebpayassignment.ui.theme.ZebPayAssignmentTheme
+
+class MainActivity : ComponentActivity() {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        enableEdgeToEdge()
+        setContent {
+            ZebPayAssignmentTheme {
+                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
+                    // Calling Crazy List
+                    MyCrazyListDemo(innerPadding)
+                }
+            }
+        }
+    }
+}
+
+// Composable to render the crazy list
+@Composable
+fun MyCrazyListDemo(innerPadding : PaddingValues) {
+    val painter = painterResource(id = R.drawable.ic_launcher_background)
+    val context = LocalContext.current
+
+    Column (modifier = Modifier.padding(innerPadding)) {
+
+        CrazyListChain
+            .space(16.dp)
+            .header("Demo")
+            .text("CrazyList custom view using compose")
+            .image(painter)
+            .button("Click Me") {
+                Toast.makeText(context, "Button clicked!", Toast.LENGTH_SHORT).show()
+            }
+            .textField("Type something") {
+                Toast.makeText(context, "Typed: $it", Toast.LENGTH_SHORT).show()
+            }
+            .Render(8.dp)
+    }
+
+}
